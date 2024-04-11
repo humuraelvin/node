@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PALINDROME FINDER</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+          var findButton = document.querySelector('button.btn-success');
+          findButton.addEventListener('click', function () {
+            var phraseInput = document.getElementById('phrase');
+            var minInput = document.getElementById('lenth');
+            var maxInput = document.getElementById('to');
+            var palindromesList = document.createElement('ul');
+            var countDiv = document.createElement('div');
+            
+            // Clear previous information
+            var existingPalindromes = document.getElementById('palindromes');
+            existingPalindromes.innerHTML = '';
+            
+            var phrase = phraseInput.value.trim();
+            var min = parseInt(minInput.value, 10);
+            var max = parseInt(maxInput.value, 10);
+            
+            var words = phrase.split(' ');
+            var palindromes = [];
+            
+            // Find palindromes within the specified length range
+            words.forEach(function (word) {
+              var wordLength = word.length;
+              var isPalindrome = true;
+              
+              // Check if the word is within the length range
+              if ((isNaN(min) || wordLength >= min) && (isNaN(max) || wordLength <= max)) {
+                // Check if the word is a palindrome
+                for (var i = 0; i < Math.floor(wordLength / 2); i++) {
+                  if (word.charAt(i).toLowerCase() !== word.charAt(wordLength - 1 - i).toLowerCase()) {
+                    isPalindrome = false;
+                    break;
+                  }
+                }
+                
+                if (isPalindrome) {
+                  palindromes.push(word);
+                }
+              }
+            });
+            
+            // Create list items for each palindrome
+            palindromes.forEach(function (palindrome, index) {
+              var li = document.createElement('li');
+              li.textContent = palindrome;
+              
+              // Set background color for every other palindrome
+              if (index % 2 === 0) {
+                li.style.backgroundColor = '#CC0000';
+              }
+              
+              palindromesList.appendChild(li);
+            });
+            
+            // Display count of total palindromes
+            countDiv.textContent = palindromes.length + ' total palindrome(s)';
+            
+            // Append the list and count to the existing HTML
+            existingPalindromes.appendChild(palindromesList);
+            existingPalindromes.appendChild(countDiv);
+          });
+        });
+    </script>
+
+</head>
+<body>
+        <br><br><br><br><br><br><br>
+     <center>
+        <h1>PALINDROME FINDER!</h1>
+
+        <br><br>
+        <div class="textarea">
+            <label>Phrase: </label>
+            <input type="text" name="phrase" id="phrase">
+        </div>
+        <br><br>   
+
+        Lenght: <input type="number" name="lenth" id="lenth"> to <input type="number" name="to" id="to">
+           
+        <br><br><br>
+
+        <button type="submit" class="btn btn-success" >Find Palindromes</button> 
+           <br><br>
+        <div id="palindromes"></div>
+     </center>
+
+
+
+</body>
+</html>

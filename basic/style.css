@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container{
+    width: 500px;
+    height: 500px;
+    align-items: center;
+    position: relative;
+}
+
+.textarea input{
+    width: 500px;
+    height: 70px;
+    border-radius: 30px;
+    padding: 5px 5px 5px 5px;
+}
+
